@@ -9,12 +9,21 @@ class peliculamodel {
     }
 
 	public function Getpeliculas(){
-        $sentencia = $this->db->prepare( "select * from peliculas");
+        $sentencia = $this->db->prepare( "SELECT * FROM peliculas");
         $sentencia->execute();
         $peliculas = $sentencia->fetchAll(PDO::FETCH_OBJ);
         
         return $peliculas;
     }
+    public function GetGeneros (){
+        $sentencia = $this->db->prepare("SELECT * FROM generos");
+        $sentencia->execute();
+        $generos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+
+        return $generos;
+    }
+    
+
     
     public function Insertarpeliculas($id,$titulo,$sinopsis,$valor){
 

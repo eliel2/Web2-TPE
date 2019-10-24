@@ -34,14 +34,36 @@ class peliculascontroller {
 
     public function GetPeliculas(){
         $this->checkLogIn();
-        $peliculas = $this->model->GetPeliculas();
+        $peliculascongenero = $this->getPeliculasConGenero();
+
         $id = $this->checkUser();
-        $this->view->DisplayPeliculas($peliculas,$id);
+
+        $this->view->DisplayPeliculas($peliculascongenero,$id);
+    }
+    function getPeliculasConGenero() {
+
+        $peliculas = $this->model->Getpeliculas();
+
+        $generos = $this->model->GetGeneros();
+
+        $peliculascongenero = array();
+        foreach($generos as $genero) {
+            $p['genero']= $genero->genero;
+            foreach ($peliculas as $pelicula){
+                if ($genero->id_genero == $pelicula ->id_generoFK){
+                    $p['titulo'] = $pelicula->titulo;
+                    $p['sinopsis'] = $pelicula->sinopsis;
+                    array_push($peliculascongenero, $p);
+                }
+            }
+        }
+
+        return $peliculascongenero;
     }
 
     public function InsertarPeliculas(){
 
-        $this->model->InsertarPeliculas($_POST['id:'],$_POST['titulo'],$_POST['sinopsis'],$_POST['valor'] );
+        $this->model->InsertarPeliculas($_POST['id:'],$_POST['titulo'],$_POST['sinopsis'],$_POST['id_generoFK'] );
         header("Location: " . BASE_URL);
     }
     

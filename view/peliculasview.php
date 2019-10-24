@@ -7,12 +7,12 @@ class peliculasview {
 
     }
 
-    public function DisplayPeliculas($peliculas,$id){
+    public function DisplayPeliculas($peliculascongenero,$id){
 
             $smarty = new Smarty();
             $smarty->assign('titulo',"Peliculas");
             $smarty->assign('BASE_URL',BASE_URL);
-            $smarty->assign('lista_peliculas',$peliculas);
+            $smarty->assign('peliculascongenero',$peliculascongenero);
             $smarty->assign('id_usuario',$id);
             $smarty->display('templates/peliculas.tpl');
            
