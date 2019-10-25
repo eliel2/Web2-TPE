@@ -51,6 +51,7 @@ class peliculascontroller {
             $p['genero']= $genero->genero;
             foreach ($peliculas as $pelicula){
                 if ($genero->id_genero == $pelicula ->id_generoFK){
+                    $p['id_pelicula'] = $pelicula->id_pelicula;
                     $p['titulo'] = $pelicula->titulo;
                     $p['sinopsis'] = $pelicula->sinopsis;
                     array_push($peliculascongenero, $p);
@@ -62,7 +63,6 @@ class peliculascontroller {
     }
 
     public function InsertarPeliculas(){
-
         $this->model->InsertarPeliculas($_POST['id:'],$_POST['titulo'],$_POST['sinopsis'],$_POST['id_generoFK'] );
         header("Location: " . BASE_URL);
     }

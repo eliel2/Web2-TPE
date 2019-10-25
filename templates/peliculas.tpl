@@ -10,7 +10,6 @@
                   <th>Pelicula</th>
                   <th>Sinopsis</th>
                   <th>Genero</th>
-                  <th>Valor</th>
                   <th>Al carro</th>   
                 </tr>
               </thead>
@@ -20,8 +19,10 @@
                   <td>{$pelicula["titulo"]}</td>
                   <td>{$pelicula["sinopsis"]}</td>
                   <td>{$pelicula["genero"]}</td> 
-                  <td><input type="submit" class="btn btn-success" value="comprar"></td>     
-                  <td><button><a href = "borrar/{$pelicula->id_pelicula}">Borrar</a></button></td>
+                  <td><input type="submit" class="btn btn-success" value="comprar"></td>
+                  {if $id_usuario eq "0"}   
+                    <td><button><a href = "borrar/{$pelicula["id_pelicula"]}">Borrar</a></button></td>
+                  {/if}
                 </tr>
               {/foreach}
               </tbody>
@@ -29,17 +30,16 @@
           </div>
         </div>
       {if $id_usuario eq "0"}
-      <div class="col-md-12">
-        <div class="completar">
-          <form action="insertar" method="post">
-            <input type="text" name="titulo" placeholder="titulo">
-            <input type="text" name="sinopsis" placeholder="sinopsis">
-            <input type="text" name="genero" placeholder="genero">
-            <input type="number" name="valor" placeholder="valor">
-            <input type="submit" class="btn btn-success" value="Insertar">
-          </form>
+        <div class="col-md-12">
+          <div class="completar">
+            <form action="insertar" method="post">
+              <input type="text" name="titulo" placeholder="titulo">
+              <input type="text" name="sinopsis" placeholder="sinopsis">
+              <input type="text" name="id_generoFK" placeholder="genero">
+              <input type="submit" class="btn btn-success" value="Insertar">
+            </form>
+          </div>
         </div>
-      </div>
       {/if}
     </div>
 {include file="footer.tpl"}

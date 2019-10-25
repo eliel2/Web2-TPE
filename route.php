@@ -13,7 +13,7 @@ define("URL_LOGOUT", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT
 $r = new Router();
 
 $r->addRoute("peliculas", "GET", "peliculascontroller", "GetPeliculas");
-$r->addRoute("insertar", "POST", "peliculascontroller", "InsertarPelicula");
+$r->addRoute("insertar", "POST", "peliculascontroller", "InsertarPeliculas");
 $r->addRoute("user","GET","usercontroller","DisplayUser");
 $r->addRoute("iniciarSesion","POST","usercontroller","IniciarSesion");
 $r->addRoute("registro","GET","registrarcontroller","DisplayRegistro");

@@ -15,7 +15,7 @@ class peliculamodel {
         
         return $peliculas;
     }
-    public function GetGeneros (){
+    public function GetGeneros(){
         $sentencia = $this->db->prepare("SELECT * FROM generos");
         $sentencia->execute();
         $generos = $sentencia->fetchAll(PDO::FETCH_OBJ);
@@ -25,10 +25,10 @@ class peliculamodel {
     
 
     
-    public function Insertarpeliculas($id,$titulo,$sinopsis,$valor){
+    public function Insertarpeliculas($id,$titulo,$sinopsis,$id_generoFk){
 
-        $sentencia = $this->db->prepare("INSERT INTO peliculas(id_pelicula,titulo, sinopsis, valor) VALUES(?,?,?,?)");
-        $sentencia->execute(array($id,$titulo,$sinopsis,$valor));
+        $sentencia = $this->db->prepare("INSERT INTO peliculas(id_pelicula,titulo, sinopsis, id_generoFK) VALUES(?,?,?,?)");
+        $sentencia->execute(array($id,$titulo,$sinopsis,$id_generoFk));
     }
     public function BorrarPelicula($id){
         $sentencia = $this->db->prepare("DELETE FROM peliculas WHERE id_pelicula=?");
