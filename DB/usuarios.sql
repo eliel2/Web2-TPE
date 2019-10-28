@@ -39,11 +39,8 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `usuario`, `email`, `contrasena`) VALUES
-(0, 'admi', 'af', '$2y$10$iN7mo17qt.xhE0veEtmGp.OKIzYSG9pyq4twARk8oU7fGw357bClO'),
-(2, 'lucas', 'aaaa', '123'),
-(3, 'ele', 'alonx320@hotmail.com', '$2y$10$zxeBypVOHdexGI4pNYnTV.sDe0vrW0oJerIGvQEsRpu4/0/C3chpS'),
-(4, 'admin', 'alonx320@hotmail.com', '0');
+INSERT INTO `usuarios` (`id_usuario`, `usuario`, `email`, `contrasena`,`administrador`) VALUES
+(0, 'admin', 'admin@gmail.com', '$2y$10$iN7mo17qt.xhE0veEtmGp.OKIzYSG9pyq4twARk8oU7fGw357bClO',1)
 
 --
 -- Índices para tablas volcadas

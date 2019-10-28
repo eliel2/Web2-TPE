@@ -1,4 +1,4 @@
-<?php
+|<?php
 require_once("./model/peliculasmodel.php");
 require_once("./view/peliculasview.php");
 
@@ -28,7 +28,7 @@ class peliculascontroller {
         
     }
     public function checkUser (){
-        $id_usuario = $_SESSION['id_usuario'];
+        $id_usuario = $_SESSION['administrador'];
         return $id_usuario;
     }
 
@@ -58,12 +58,17 @@ class peliculascontroller {
                 }
             }
         }
-
         return $peliculascongenero;
     }
 
     public function InsertarPeliculas(){
         $this->model->InsertarPeliculas($_POST['id:'],$_POST['titulo'],$_POST['sinopsis'],$_POST['id_generoFK'] );
+        header("Location: " . BASE_URL);
+    }
+    public function EditarTitulo ($params =null){
+        $id = $params[':ID'];
+        $titulo = $_GET['tituloe'];
+        $this->model->EditarTitulo($id,$titulo);
         header("Location: " . BASE_URL);
     }
     

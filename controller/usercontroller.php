@@ -20,6 +20,7 @@ class usercontroller {
             session_start();
             $_SESSION['user'] = $usuario->usuario;
             $_SESSION['id_usuario'] = $usuario->id_usuario;
+            $_SESSION['administrador'] = $usuario->administrador;
             header("Location: " . BASE_URL);
         }else{
             header("Location: " . URL_LOGIN);

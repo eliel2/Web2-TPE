@@ -22,9 +22,10 @@ class peliculamodel {
 
         return $generos;
     }
-    
-
-    
+    public function EditarTitulo($id,$titulo){
+        $sentencia = $this->db->prepare("UPDATE peliculas SET titulo='$titulo' WHERE id_pelicula = ?");
+        $sentencia->execute(array($id,$titulo));
+    }
     public function Insertarpeliculas($id,$titulo,$sinopsis,$id_generoFk){
 
         $sentencia = $this->db->prepare("INSERT INTO peliculas(id_pelicula,titulo, sinopsis, id_generoFK) VALUES(?,?,?,?)");
