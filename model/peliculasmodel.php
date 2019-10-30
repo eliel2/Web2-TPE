@@ -6,7 +6,7 @@ class peliculamodel {
 
     function __construct(){
         $this->db = new PDO('mysql:host=localhost;'.'dbname=db_cine;charset=utf8', 'root', '');
-    }
+    } 
 
 	public function Getpeliculas(){
         $sentencia = $this->db->prepare( "SELECT * FROM peliculas");
@@ -15,6 +15,15 @@ class peliculamodel {
         
         return $peliculas;
     }
+
+    public function GetPelicula($id){
+        $sentencia = $this->db->prepare( "SELECT * FROM peliculas WHERE id_pelicula = ?");
+        $sentencia->execute(array($id));
+        $pelicula = $sentencia->fetch(PDO::FETCH_OBJ);
+        
+        return $pelicula;
+    }
+
     public function GetGeneros(){
         $sentencia = $this->db->prepare("SELECT * FROM generos");
         $sentencia->execute();
@@ -23,7 +32,7 @@ class peliculamodel {
         return $generos;
     }
     public function EditarTitulo($id,$titulo){
-        $sentencia = $this->db->prepare("UPDATE peliculas SET titulo='$titulo' WHERE id_pelicula = ?");
+        $sentencia = $this->db->prepare("UPDATE peliculas SET titulo = '$titulo' WHERE id_pelicula");
         $sentencia->execute(array($id,$titulo));
     }
     public function Insertarpeliculas($id,$titulo,$sinopsis,$id_generoFk){

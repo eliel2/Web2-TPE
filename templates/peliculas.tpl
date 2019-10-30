@@ -10,7 +10,6 @@
                   <th>Pelicula</th>
                   <th>Sinopsis</th>
                   <th>Genero</th>
-                  <th>Al carro</th>
                   {if $id_usuario eq "1"}
                   <th>Borrar</th>
                   <th>Editar</th>
@@ -18,19 +17,18 @@
                 </tr>
               </thead>
               <tbody>
+                {foreach from=$peliculascongenero item=pelicula}
                 <tr>
-              {foreach from=$peliculascongenero item=pelicula}
                   <td>{$pelicula["titulo"]}</td>
                   <td>{$pelicula["sinopsis"]}</td>
                   <td>{$pelicula["genero"]}</td> 
-                  <td><input type="submit" class="btn btn-success" value="comprar"></td>
                   {if $id_usuario eq "1"}
                     <td><button><a href = "borrar/{$pelicula["id_pelicula"]}">Borrar</a></button></td>
                     <td><button><a href = "editar/{$pelicula["id_pelicula"]}">Editar</a></button></td>
                     <td><input type="text" name="tituloe" placeholder="Editar titulo"></td>
                   {/if}
                 </tr>
-              {/foreach}
+                {/foreach}
               </tbody>
             </table>
           </div>
@@ -41,7 +39,11 @@
             <form action="insertar" method="post">
               <input type="text" name="titulo" placeholder="titulo">
               <input type="text" name="sinopsis" placeholder="sinopsis">
-              <input type="text" name="id_generoFK" placeholder="genero">
+              <select name="id_generoFK">
+                <option value="0">Terror</option>
+                <option value="1">Acción</option>
+                <option value="2">Ciencia Ficción</option>
+                <option value="3">Comedia</option>
               <input type="submit" class="btn btn-success" value="Insertar">
             </form>
           </div>

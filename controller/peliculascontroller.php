@@ -40,6 +40,17 @@ class peliculascontroller {
 
         $this->view->DisplayPeliculas($peliculascongenero,$id);
     }
+
+    public function GetPelicula($params = null){
+        $this->checkLogIn();
+        $id_pelicula = $params[':ID'];
+        $pelicula = $this->model->GetPelicula($id_pelicula);
+
+        $id = $this->checkUser();
+
+        $this->view->ShowPelicula($pelicula);
+    }
+
     function getPeliculasConGenero() {
 
         $peliculas = $this->model->Getpeliculas();
@@ -67,8 +78,7 @@ class peliculascontroller {
     }
     public function EditarTitulo ($params =null){
         $id = $params[':ID'];
-        $titulo = $_GET['tituloe'];
-        $this->model->EditarTitulo($id,$titulo);
+        $this->model->EditarTitulo($id,$_GET['tituloe']);
         header("Location: " . BASE_URL);
     }
     
