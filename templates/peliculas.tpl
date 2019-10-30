@@ -40,10 +40,10 @@
               <input type="text" name="titulo" placeholder="titulo">
               <input type="text" name="sinopsis" placeholder="sinopsis">
               <select name="id_generoFK">
-                <option value="0">Terror</option>
-                <option value="1">Acción</option>
-                <option value="2">Ciencia Ficción</option>
-                <option value="3">Comedia</option>
+                {foreach from=$generos item=genero}
+                  <option value={$genero->id_genero}>{$genero->genero}</option>
+                {/foreach}
+              </select>
               <input type="submit" class="btn btn-success" value="Insertar">
             </form>
           </div>

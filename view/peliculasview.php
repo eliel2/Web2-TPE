@@ -10,11 +10,12 @@ class peliculasview {
         $this->smarty->assign('BASE_URL',BASE_URL);
     }
 
-    public function DisplayPeliculas($peliculascongenero,$id){
+    public function DisplayPeliculas($peliculascongenero,$id,$generos){
 
         $this->smarty->assign('titulo',"Peliculas");
         $this->smarty->assign('peliculascongenero',$peliculascongenero);
         $this->smarty->assign('id_usuario',$id);
+        $this->smarty->assign('generos',$generos);
         
         $this->smarty->display('templates/peliculas.tpl');
     }

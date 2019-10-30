@@ -37,8 +37,9 @@ class peliculascontroller {
         $peliculascongenero = $this->getPeliculasConGenero();
 
         $id = $this->checkUser();
+        $generos = $this->model->GetGeneros();
 
-        $this->view->DisplayPeliculas($peliculascongenero,$id);
+        $this->view->DisplayPeliculas($peliculascongenero,$id,$generos);
     }
 
     public function GetPelicula($params = null){
@@ -60,6 +61,7 @@ class peliculascontroller {
         $peliculascongenero = array();
         foreach($generos as $genero) {
             $p['genero']= $genero->genero;
+            $p['id_genero']=$genero->id_genero;
             foreach ($peliculas as $pelicula){
                 if ($genero->id_genero == $pelicula ->id_generoFK){
                     $p['id_pelicula'] = $pelicula->id_pelicula;
