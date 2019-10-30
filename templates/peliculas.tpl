@@ -25,7 +25,6 @@
                   {if $id_usuario eq "1"}
                     <td><button><a href = "borrar/{$pelicula["id_pelicula"]}">Borrar</a></button></td>
                     <td><button><a href = "editar/{$pelicula["id_pelicula"]}">Editar</a></button></td>
-                    <td><input type="text" name="tituloe" placeholder="Editar titulo"></td>
                   {/if}
                 </tr>
                 {/foreach}

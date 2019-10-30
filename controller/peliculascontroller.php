@@ -51,6 +51,25 @@ class peliculascontroller {
 
         $this->view->ShowPelicula($pelicula);
     }
+    public function MostrarEditar($params = null){
+        $this->checkLogIn();
+        $id_pelicula = $params[':ID'];
+        $pelicula = $this->model->GetPelicula($id_pelicula);
+        $generos = $this->model->GetGeneros();
+
+        $id = $this->checkUser();
+
+        $this->view->MostrarEditar($pelicula,$id,$generos);
+
+    }
+
+    public function EditarPeliculas(){
+        $this->checkLogIn();
+
+        $this->model->EditarPeliculas($_POST['tituloe'],$_POST['sinopsise'],$_POST['id_generoFKe'],$_POST['id_pelicula']);
+        
+        header("Location: " . BASE_URL);
+    }
 
     function getPeliculasConGenero() {
 
@@ -78,12 +97,7 @@ class peliculascontroller {
         $this->model->InsertarPeliculas($_POST['id:'],$_POST['titulo'],$_POST['sinopsis'],$_POST['id_generoFK'] );
         header("Location: " . BASE_URL);
     }
-    public function EditarTitulo ($params =null){
-        $id = $params[':ID'];
-        $this->model->EditarTitulo($id,$_GET['tituloe']);
-        header("Location: " . BASE_URL);
-    }
-    
+
     public function BorrarPelicula($params = null) {
         $id = $params[':ID'];
         $this->model->BorrarPelicula($id);

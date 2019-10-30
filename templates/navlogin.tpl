@@ -3,7 +3,7 @@
         <a class="navbar-brand" href="peliculas">Peliculas</a>
     </div>
     <ul class="nav navbar-nav">
-        <li class="active"><a href="peliculas">Home</a></li>
+        <li class="active"><a href="{BASE_URL}">Home</a></li>
     </ul>
     <li><a href="#">Page 1</a></li>
     <li><a href="#">Page 2</a></li>

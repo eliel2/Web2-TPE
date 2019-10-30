@@ -25,4 +25,12 @@ class peliculasview {
         
         $this->smarty->display('templates/pelicula.tpl');
         }
+    public function MostrarEditar($pelicula,$id,$generos){
+        $this->smarty->assign('titulo',"Peliculas");
+        $this->smarty->assign('pelicula',$pelicula);
+        $this->smarty->assign('id_usuario',$id);
+        $this->smarty->assign('generos',$generos);
+        
+        $this->smarty->display('templates/editar.tpl');
+    }
     };
