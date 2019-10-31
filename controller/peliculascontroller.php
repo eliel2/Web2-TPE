@@ -49,7 +49,25 @@ class peliculascontroller {
 
         $id = $this->checkUser();
 
-        $this->view->ShowPelicula($pelicula);
+        $this->view->ShowPelicula($pelicula,$id);
+    }
+    
+    public function GetGenero($params = null){
+        $this->checkLogIn();
+        $id_genero = $params[':ID'];
+        $genero = $this->model->GetGenero($id_genero);
+
+        $id = $this->checkUser();
+
+        $this->view->ShowGenero($genero,$id);
+    }
+    public function GetGeneros($params = null){
+        $this->checkLogIn();
+        $generos = $this->model->GetGeneros();
+
+        $id = $this->checkUser();
+
+        $this->view->ShowGeneros($generos,$id);
     }
     public function MostrarEditar($params = null){
         $this->checkLogIn();
@@ -62,13 +80,14 @@ class peliculascontroller {
         $this->view->MostrarEditar($pelicula,$id,$generos);
 
     }
-
-    public function EditarPeliculas(){
+    public function MostrarEditarG($params = null){
         $this->checkLogIn();
+        $id_genero = $params[':ID'];
+        $genero = $this->model->GetGenero($id_genero);
+        $id = $this->checkUser();
 
-        $this->model->EditarPeliculas($_POST['tituloe'],$_POST['sinopsise'],$_POST['id_generoFKe'],$_POST['id_pelicula']);
-        
-        header("Location: " . BASE_URL);
+        $this->view->MostrarEditarG($id,$genero);
+
     }
 
     function getPeliculasConGenero() {
@@ -102,5 +121,28 @@ class peliculascontroller {
         $id = $params[':ID'];
         $this->model->BorrarPelicula($id);
         header("Location: " . BASE_URL);
+    }
+    public function EditarPeliculas(){
+        $this->checkLogIn();
+
+        $this->model->EditarPeliculas($_POST['tituloe'],$_POST['sinopsise'],$_POST['id_generoFKe'],$_POST['id_pelicula']);
+        
+        header("Location: " . BASE_URL);
+    }
+    public function InsertarGeneros(){
+        $this->model->InsertarGeneros($_POST['id:'],$_POST['genero']);
+        header("Location: " . BASE_GENERO);
+    }
+    public function BorrarGenero($params = null) {
+        $id = $params[':ID'];
+        $this->model->BorrarGenero($id);
+        header("Location: " . BASE_GENERO);
+    }
+    public function EditarGenero(){
+        $this->checkLogIn();
+
+        $this->model->EditarGenero($_POST['genero'],$_POST['id_genero']);
+        
+        header("Location: " . BASE_GENERO);
     }
 }

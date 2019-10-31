@@ -8,15 +8,14 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Pelicula</th>
-                        <th>Sinopsis</th>
-                    
+                        <th>Genero</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
                     <tr>                    
-                        <td>{$pelicula->titulo}</td>
-                        <td>{$pelicula->sinopsis}</td>             
+                        <td>{$genero->genero}</td>
+                                 
                     </tr>
                 </tbody>
             </table>
