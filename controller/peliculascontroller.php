@@ -1,15 +1,18 @@
 |<?php
 require_once("./model/peliculasmodel.php");
 require_once("./view/peliculasview.php");
+require_once("./model/generosmodel.php");
 
 class peliculascontroller {
 
     private $model;
     private $view;
+    private $generomodel;
 
 	function __construct(){
         $this->model = new peliculamodel();
         $this->view = new peliculasview();
+        $this->generomodel = new generosmodel();
     }
     
     public function checkLogIn(){
@@ -37,7 +40,7 @@ class peliculascontroller {
         $peliculascongenero = $this->getPeliculasConGenero();
 
         $id = $this->checkUser();
-        $generos = $this->model->GetGeneros();
+        $generos = $this->generomodel->GetGeneros();
 
         $this->view->DisplayPeliculas($peliculascongenero,$id,$generos);
     }
@@ -52,41 +55,16 @@ class peliculascontroller {
         $this->view->ShowPelicula($pelicula,$id);
     }
     
-    public function GetGenero($params = null){
-        $this->checkLogIn();
-        $id_genero = $params[':ID'];
-        $genero = $this->model->GetGenero($id_genero);
-
-        $id = $this->checkUser();
-
-        $this->view->ShowGenero($genero,$id);
-    }
-    public function GetGeneros($params = null){
-        $this->checkLogIn();
-        $generos = $this->model->GetGeneros();
-
-        $id = $this->checkUser();
-
-        $this->view->ShowGeneros($generos,$id);
-    }
+ 
     public function MostrarEditar($params = null){
         $this->checkLogIn();
         $id_pelicula = $params[':ID'];
         $pelicula = $this->model->GetPelicula($id_pelicula);
-        $generos = $this->model->GetGeneros();
+        $generos = $this->generomodel->GetGeneros();
 
         $id = $this->checkUser();
 
         $this->view->MostrarEditar($pelicula,$id,$generos);
-
-    }
-    public function MostrarEditarG($params = null){
-        $this->checkLogIn();
-        $id_genero = $params[':ID'];
-        $genero = $this->model->GetGenero($id_genero);
-        $id = $this->checkUser();
-
-        $this->view->MostrarEditarG($id,$genero);
 
     }
 
@@ -94,7 +72,7 @@ class peliculascontroller {
 
         $peliculas = $this->model->Getpeliculas();
 
-        $generos = $this->model->GetGeneros();
+        $generos = $this->generomodel->GetGeneros();
 
         $peliculascongenero = array();
         foreach($generos as $genero) {
@@ -128,21 +106,5 @@ class peliculascontroller {
         $this->model->EditarPeliculas($_POST['tituloe'],$_POST['sinopsise'],$_POST['id_generoFKe'],$_POST['id_pelicula']);
         
         header("Location: " . BASE_URL);
-    }
-    public function InsertarGeneros(){
-        $this->model->InsertarGeneros($_POST['id:'],$_POST['genero']);
-        header("Location: " . BASE_GENERO);
-    }
-    public function BorrarGenero($params = null) {
-        $id = $params[':ID'];
-        $this->model->BorrarGenero($id);
-        header("Location: " . BASE_GENERO);
-    }
-    public function EditarGenero(){
-        $this->checkLogIn();
-
-        $this->model->EditarGenero($_POST['genero'],$_POST['id_genero']);
-        
-        header("Location: " . BASE_GENERO);
     }
 }

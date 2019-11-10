@@ -4,6 +4,7 @@
 require_once('controller/peliculascontroller.php');
 require_once('controller/usercontroller.php');
 require_once('controller/registrarcontroller.php');
+require_once('controller/generoscontroller.php');
 require_once('Router.php');
 
 define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
@@ -16,11 +17,11 @@ $r = new Router();
 
 $r->addRoute("peliculas", "GET", "peliculascontroller", "GetPeliculas");
 $r->addRoute("pelicula/:ID","GET","peliculascontroller","GetPelicula");
-$r->addRoute("genero/:ID","GET","peliculascontroller","GetGenero");
-$r->addRoute("generos","GET","peliculascontroller","GetGeneros");
-$r->addRoute("insertarG", "POST", "peliculascontroller", "InsertarGeneros");
-$r->addRoute("editarG/:ID", "GET", "peliculascontroller", "MostrarEditarG");
-$r->addRoute("editarG","POST","peliculascontroller","EditarGenero");
+$r->addRoute("genero/:ID","GET","generoscontroller","GetGenero");
+$r->addRoute("generos","GET","generoscontroller","GetGeneros");
+$r->addRoute("insertarG", "POST", "generoscontroller", "InsertarGeneros");
+$r->addRoute("editarG/:ID", "GET", "generoscontroller", "MostrarEditarG");
+$r->addRoute("editarG","POST","generoscontroller","EditarGenero");
 $r->addRoute("insertar", "POST", "peliculascontroller", "InsertarPeliculas");
 $r->addRoute("user","GET","usercontroller","DisplayUser");
 $r->addRoute("editar/:ID","GET","peliculascontroller","MostrarEditar");
@@ -30,7 +31,7 @@ $r->addRoute("registro","GET","registrarcontroller","DisplayRegistro");
 $r->addRoute("registrar","POST","registrarcontroller","Registrar");
 $r->addRoute("logout","GET","usercontroller","Logout");
 $r->addRoute("borrar/:ID", "GET", "peliculascontroller", "BorrarPelicula");
-$r->addRoute("borrarG/:ID", "GET", "peliculascontroller", "BorrarGenero");
+$r->addRoute("borrarG/:ID", "GET", "generoscontroller", "BorrarGenero");
 
 
 $r->setDefaultRoute("peliculascontroller", "GetPeliculas");
