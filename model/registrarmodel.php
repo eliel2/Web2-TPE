@@ -14,4 +14,4 @@
                 $sentencia = $this->db->prepare("INSERT INTO usuarios(usuario,email,contrasena) VALUES(?,?,?)");
                 $sentencia->execute(array($usuario,$mail,$hash));
             }
-    }   
+    }  

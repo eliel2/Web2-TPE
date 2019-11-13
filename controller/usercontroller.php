@@ -11,6 +11,27 @@ class usercontroller {
         $this->model = new UserModel();
         $this->view = new UserView();
     }
+    
+    public function checkLogIn(){
+        session_start();
+        
+        if(!isset($_SESSION['user'])){
+            header("Location: " . URL_LOGIN);
+            die();
+        }
+
+        if ( isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 5000)) { 
+            header("Location: " . URL_LOGOUT);
+            die();
+        } 
+        $_SESSION['LAST_ACTIVITY'] = time();
+        
+    }
+    public function checkUser (){
+        $id_usuario = $_SESSION['administrador'];
+        return $id_usuario;
+    }
+
     public function IniciarSesion(){
         $password = $_POST['pass'];
         
@@ -26,6 +47,7 @@ class usercontroller {
             header("Location: " . URL_LOGIN);
         }
     }
+
     public function DisplayUser() {
         $this->view->DisplayUser();
     }
@@ -34,5 +56,25 @@ class usercontroller {
         session_start();
         session_destroy();
         header("Location: " . URL_LOGIN);
+    }
+
+    public function AgregarAdmin(){
+        $this->model->AgregarAdmin($_POST['admin'],$_POST['valoradmin']);
+        header("Location: " . BASE_USER);
+    }
+
+    public function BorrarUser($params = null){
+        $id = $params[':ID'];
+        $this->model->BorrarUser($id);
+        header("Location: " . BASE_USER);
+    }
+
+    public function GetUsuarios(){
+        $this->checkLogIn();
+        $users = $this->model->GetUsuarios();
+
+        $id = $this->checkUser();
+
+        $this->view->AdminUser($id,$users);
     }
 }

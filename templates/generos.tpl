@@ -8,7 +8,7 @@
           <thead>
             <tr>                  
               <th>Generos</th>            
-              {if $id_usuario eq "1"}
+              {if $admin eq "1"}
                 <th>Borrar</th>
                 <th>Editar</th>
               {/if} 
@@ -18,7 +18,7 @@
             {foreach from=$generos item=genero}
               <tr>                    
                 <td>{$genero->genero}</td>
-                {if $id_usuario eq "1"}
+                {if $admin eq "1"}
                   <td><button class="btn btn-danger"><a href = "borrarG/{$genero->id_genero}">Borrar</a></button></td>
                   <td><button class="btn btn-warning"><a href = "editarG/{$genero->id_genero}">Editar</a></button></td>
                 {/if}
@@ -30,7 +30,7 @@
     </div>
   </div>
 </div>  
-{if $id_usuario eq "1"}
+{if $admin eq "1"}
   <div class="col-md-12">
     <div class="completar">
       <form action="insertarG" method="post">

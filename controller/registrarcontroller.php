@@ -14,7 +14,10 @@ class registrarcontroller {
     public function Registrar(){
         if (($_POST['usuario'] != '') && ($_POST['email'] != '') && ($_POST['contrasena'] != '')){
             $this->model->Registrar($_POST['usuario'],$_POST['email'],$_POST['contrasena']);
-            header("Location: " . URL_LOGIN);
+            session_start();
+            $_SESSION['user'] = $_POST['usuario'];
+            $_SESSION['administrador'] = 0;
+            header("Location: " . BASE_URL);
         }else{
             header("Location: " . registro);
         } 

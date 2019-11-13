@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 {include file="navlogout.tpl"}
-                {if $id_usuario eq "1"}
+                {if $admin eq "1"}
 
                     <form action="editar" method="post">
                   <input type="text" name="tituloe" value="{$pelicula->titulo}"></td>

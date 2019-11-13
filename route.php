@@ -11,8 +11,7 @@ define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"]
 define("BASE_GENERO", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/generos');
 define("URL_LOGIN", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/user');
 define("URL_LOGOUT", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/logout');
-
-
+define("BASE_USER", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/usuarios');
 $r = new Router();
 
 $r->addRoute("peliculas", "GET", "peliculascontroller", "GetPeliculas");
@@ -32,6 +31,10 @@ $r->addRoute("registrar","POST","registrarcontroller","Registrar");
 $r->addRoute("logout","GET","usercontroller","Logout");
 $r->addRoute("borrar/:ID", "GET", "peliculascontroller", "BorrarPelicula");
 $r->addRoute("borrarG/:ID", "GET", "generoscontroller", "BorrarGenero");
+$r->addRoute("borrarUser/:ID", "GET", "usercontroller", "BorrarUser");
+$r->addRoute("usuarios", "GET", "usercontroller", "GetUsuarios");
+$r->addRoute("administrador", "POST", "usercontroller", "AgregarAdmin");
+
 
 
 $r->setDefaultRoute("peliculascontroller", "GetPeliculas");

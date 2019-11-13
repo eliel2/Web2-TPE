@@ -18,7 +18,7 @@ class peliculascontroller {
     public function checkLogIn(){
         session_start();
         
-        if(!isset($_SESSION['id_usuario'])){
+        if(!isset($_SESSION['user'])){
             header("Location: " . URL_LOGIN);
             die();
         }

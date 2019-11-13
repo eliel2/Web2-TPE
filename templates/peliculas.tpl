@@ -10,7 +10,7 @@
                   <th>Pelicula</th>
                   <th>Sinopsis</th>
                   <th>Genero</th>
-                  {if $id_usuario eq "1"}
+                  {if $admin eq "1"}
                   <th>Borrar</th>
                   <th>Editar</th>
                   {/if}   
@@ -22,7 +22,7 @@
                   <td>{$pelicula["titulo"]}</td>
                   <td>{$pelicula["sinopsis"]}</td>
                   <td>{$pelicula["genero"]}</td> 
-                  {if $id_usuario eq "1"}
+                  {if $admin eq "1"}
                     <td><button class="btn btn-danger"><a href = "borrar/{$pelicula["id_pelicula"]}">Borrar</a></button></td>
                     <td><button class="btn btn-warning"><a href = "editar/{$pelicula["id_pelicula"]}">Editar</a></button></td>
                   {/if}
@@ -72,7 +72,7 @@
   </div>
 </div>
 </div>
-      {if $id_usuario eq "1"}
+      {if $admin eq "1"}
         <div class="col-md-12">
           <div class="completar">
             <form action="insertar" method="post">
