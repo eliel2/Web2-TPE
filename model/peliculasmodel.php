@@ -1,5 +1,7 @@
 <?php
 
+require_once('imagenesmodel.php');
+
 class peliculamodel {
 
     private $db;
@@ -38,5 +40,19 @@ class peliculamodel {
     public function BorrarPelicula($id){
         $sentencia = $this->db->prepare("DELETE FROM peliculas WHERE id_pelicula=?");
         $sentencia->execute(array($id));
+    }
+
+
+    public function GetPeliculasConImagenes(){
+        $sentencia = $this->db->prepare( "SELECT * FROM peliculas JOIN imagenes ON peliculas.id_peliculas = imagenes.id_peliculasfk ");
+        $sentencia->execute();
+        $peliculas = $sentencia->fetchAll(PDO::FETCH_OBJ);
+
+        $modelImagenes = new imagenesmodel();
+        foreach ($peliculas as $pelicula) {
+            $pelicula["imagenes"] = $modelImagenes->GetImagenesPorPelicula($pelicula->id_pelicula);
+        }
+        
+        return $peliculas;
     }
 }

@@ -17,21 +17,4 @@ class UserModel {
         return $password;
     }
 
-    public function GetUsuarios(){
-        $sentencia = $this->db->prepare("SELECT * FROM usuarios");
-        $sentencia->execute();
-        $usuarios = $sentencia->fetchAll(PDO::FETCH_OBJ);
-
-        return $usuarios;
-    }
-    
-    public function BorrarUser($id){
-        $sentencia = $this->db->prepare("DELETE FROM usuarios WHERE id_usuario=?");
-        $sentencia->execute(array($id));
-    }
-
-    public function AgregarAdmin($usuario,$id){
-        $sentencia = $this->db->prepare("UPDATE usuarios SET administrador=? WHERE id_usuario=?");
-        $sentencia->execute(array($id,$usuario));
-    }
 }
