@@ -5,6 +5,7 @@ require_once('controller/peliculascontroller.php');
 require_once('controller/usercontroller.php');
 require_once('controller/registrarcontroller.php');
 require_once('controller/generoscontroller.php');
+require_once('controller/imagenescontroller.php');
 require_once('Router.php');
 
 define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
@@ -12,12 +13,14 @@ define("BASE_GENERO", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_POR
 define("URL_LOGIN", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/user');
 define("URL_LOGOUT", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/logout');
 define("BASE_USER", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/usuarios');
+
 $r = new Router();
 
 $r->addRoute("peliculas", "GET", "peliculascontroller", "GetPeliculas");
 $r->addRoute("pelicula/:ID","GET","peliculascontroller","GetPelicula");
 $r->addRoute("genero/:ID","GET","generoscontroller","GetGenero");
 $r->addRoute("generos","GET","generoscontroller","GetGeneros");
+$r->addRoute("InsertarImg", "POST", "imagenescontroller", "InsertarImagenes");
 $r->addRoute("insertarG", "POST", "generoscontroller", "InsertarGeneros");
 $r->addRoute("editarG/:ID", "GET", "generoscontroller", "MostrarEditarG");
 $r->addRoute("editarG","POST","generoscontroller","EditarGenero");
@@ -34,8 +37,10 @@ $r->addRoute("borrarG/:ID", "GET", "generoscontroller", "BorrarGenero");
 $r->addRoute("borrarUser/:ID", "GET", "usercontroller", "BorrarUser");
 $r->addRoute("usuarios", "GET", "usercontroller", "GetUsuarios");
 $r->addRoute("administrador", "POST", "usercontroller", "AgregarAdmin");
-
-
+$r->addRoute("olvidosucontrasena","GET","usercontroller","MostrarRecuperacion");
+$r->addRoute("olvidecontrasena","POST","usercontroller","RecuperarContra");
+$r->addRoute("nuevacontrasena/:ID","GET","usercontroller","VerCambiarContrasena");
+$r->addRoute("contrasenanueva","POST","usercontroller","CambiarConstrasena");
 
 $r->setDefaultRoute("peliculascontroller", "GetPeliculas");
 

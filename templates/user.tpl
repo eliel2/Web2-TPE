@@ -6,4 +6,6 @@
             <input type="submit" value="Login">
             <button><a href = "registro">Registrarse</a></button>
         </form>
+        <button><a href = "olvidosucontrasena">Olvidaste tu contraseña?</a></button>
+
 {include file="footer.tpl"}

@@ -2,28 +2,27 @@
 require_once("./model/peliculasmodel.php");
 require_once("./view/peliculasview.php");
 require_once("./model/generosmodel.php");
+require_once("./model/imagenesmodel.php");
 
 class peliculascontroller {
 
     private $model;
     private $view;
     private $generomodel;
+    private $imagenesmodel;
 
 	function __construct(){
         $this->model = new peliculamodel();
         $this->view = new peliculasview();
         $this->generomodel = new generosmodel();
+        $this->imagenesmodel = new imagenesmodel();
     }
     
     public function checkLogIn(){
         session_start();
-        
-        if(!isset($_SESSION['user'])){
-            header("Location: " . URL_LOGIN);
-            die();
-        }
 
-        if ( isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 5000)) { 
+        if ( isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 5000)) {
+            session_destroy(); 
             header("Location: " . URL_LOGOUT);
             die();
         } 
@@ -31,28 +30,54 @@ class peliculascontroller {
         
     }
     public function checkUser (){
-        $id_usuario = $_SESSION['administrador'];
+        if (isset ($_SESSION['administrador'])){
+            $id_usuario = $_SESSION['administrador'];
+        }else{
+            $id_usuario = 0;
+        }
         return $id_usuario;
+    }
+    public function retornarUser(){
+        if (isset($_SESSION['usuario'])){
+            $usuario = $_SESSION['usuario'];
+        }else {
+            $usuario= null;
+        }
+        return $usuario;
     }
 
     public function GetPeliculas(){
         $this->checkLogIn();
         $peliculascongenero = $this->getPeliculasConGenero();
-
+        
         $id = $this->checkUser();
+        $usuario = $this->retornarUser();
         $generos = $this->generomodel->GetGeneros();
 
-        $this->view->DisplayPeliculas($peliculascongenero,$id,$generos);
+        $this->view->DisplayPeliculas($peliculascongenero,$usuario,$id,$generos);
     }
 
     public function GetPelicula($params = null){
         $this->checkLogIn();
-        $id_pelicula = $params[':ID'];
-        $pelicula = $this->model->GetPelicula($id_pelicula);
+        $id_peliculas = $params[':ID'];
+        $pelicula = $this->model->GetPelicula($id_peliculas);
+        $genero = $this->generomodel->GetGenero($pelicula->id_generoFK);
+        $imagen = $this->imagenesmodel->GetImagen($pelicula->id_pelicula);
 
         $id = $this->checkUser();
-
-        $this->view->ShowPelicula($pelicula,$id);
+        $peliculacontodo = array();
+            $p['genero']= $genero->genero;
+            $p['id_genero']=$genero->id_genero;
+            $p['id_pelicula'] = $pelicula->id_pelicula;
+            $p['titulo'] = $pelicula->titulo;
+            $p['sinopsis'] = $pelicula->sinopsis;
+            if ($imagen){
+                $p['id_imagen'] = $imagen->id_peliculasfk;
+                $p['imagen'] = $imagen->imagen;
+            }
+            array_push($peliculacontodo, $p);
+        
+        $this->view->ShowPelicula($peliculacontodo,$id);
     }
     
  
@@ -71,8 +96,8 @@ class peliculascontroller {
     function getPeliculasConGenero() {
 
         $peliculas = $this->model->Getpeliculas();
-
-        $generos = $this->generomodel->GetGeneros();
+        $generos = $this->generomodel->GetGeneros();      
+        $imagenes = $this->imagenesmodel->GetImagenes();
 
         $peliculascongenero = array();
         foreach($generos as $genero) {
@@ -83,6 +108,12 @@ class peliculascontroller {
                     $p['id_pelicula'] = $pelicula->id_pelicula;
                     $p['titulo'] = $pelicula->titulo;
                     $p['sinopsis'] = $pelicula->sinopsis;
+                    foreach ($imagenes as $imagen){
+                        if ($pelicula->id_pelicula == $imagen->id_peliculasfk){
+                            $p['id_imagen'] = $imagen->id_peliculasfk;
+                            $p['imagen'] = $imagen->imagen;
+                        }
+                    }
                     array_push($peliculascongenero, $p);
                 }
             }
@@ -97,6 +128,7 @@ class peliculascontroller {
 
     public function BorrarPelicula($params = null) {
         $id = $params[':ID'];
+        $this->imagenesmodel->BorrarImagen($id);
         $this->model->BorrarPelicula($id);
         header("Location: " . BASE_URL);
     }

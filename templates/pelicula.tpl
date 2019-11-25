@@ -6,20 +6,37 @@
         <div class="col-md-9">
           <div class="tabla" style="margin: 0 auto;">
             <table>
-                <thead>
-                    <tr>
-                        <th>Pelicula</th>
-                        <th>Sinopsis</th>
-                    
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>                    
-                        <td>{$pelicula->titulo}</td>
-                        <td>{$pelicula->sinopsis}</td>             
-                    </tr>
-                </tbody>
-            </table>
+          <thead>
+            <tr>
+              <th>Pelicula</th>
+              <th>Sinopsis</th>
+              <th>Genero</th>
+              <th>Imagen</th>
+              {if $admin && $admin eq "1"}
+              <th>Borrar</th>
+              <th>Editar</th>
+              {/if}   
+            </tr>
+          </thead>
+          <tbody>
+            {foreach from=$pelicula item=peli}
+            <tr>
+              <td>{$peli["titulo"]}</td>
+              <td>{$peli["sinopsis"]}</td>
+              <td>{$peli["genero"]}</td>
+              {if isset($peli["id_imagen"]) && $peli["id_imagen"] eq $peli["id_pelicula"]}
+                <td><img src="{$peli["imagen"]}"width="100" height="100"/></td>
+              {else}
+                <td><img src="img/image-not-found.png"width="100" height="100"/></td>
+              {/if}
+              {if $admin && $admin eq "1"}
+                <td><button class="btn btn-danger"><a href = "borrar/{$peli["id_pelicula"]}">Borrar</a></button></td>
+                <td><button class="btn btn-warning"><a href = "editar/{$peli["id_pelicula"]}">Editar</a></button></td>
+              {/if}
+            </tr>
+            {/foreach}
+          </tbody>
+        </table>
           </div>
         </div>
     </div>

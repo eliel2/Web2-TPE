@@ -24,4 +24,19 @@ class UserView {
         $this->smarty->assign('admin', $id);
         $this->smarty->display('templates/adminuser.tpl');
     }
+
+    public function Recuperacion(){
+        $this->smarty->assign('titulo',"user");
+        $this->smarty->assign('BASE_URL',BASE_URL);
+        
+        $this->smarty->display('templates/olvidecontrasena.tpl');
+    }
+
+    public function CambiarContrasena($usuario){
+        $this->smarty->assign('titulo',"user");
+        $this->smarty->assign('BASE_URL',BASE_URL);
+        $this->smarty->assign('usuario',$usuario);
+
+        $this->smarty->display('templates/recuperarcontrasena.tpl');
+    }
 }

@@ -2,7 +2,7 @@
 {include file="navlogout.tpl"}
                 {if $admin eq "1"}
 
-                    <form action="editar" method="post">
+                  <form action="editar" method="post">
                   <input type="text" name="tituloe" value="{$pelicula->titulo}"></td>
                   <input type="text" name="sinopsise" value="{$pelicula->sinopsis}">
                   <input type="hidden" name="id_pelicula" value="{$pelicula->id_pelicula}">

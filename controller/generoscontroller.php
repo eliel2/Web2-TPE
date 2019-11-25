@@ -13,21 +13,20 @@ class generoscontroller {
     }
     public function checkLogIn(){
         session_start();
-        
-        if(!isset($_SESSION['user'])){
-            header("Location: " . URL_LOGIN);
-            die();
-        }
 
-        if ( isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 5000)) { 
+        if ( isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 5000)) {
+            session_destroy();
             header("Location: " . URL_LOGOUT);
-            die();
         } 
         $_SESSION['LAST_ACTIVITY'] = time();
         
     }
     public function checkUser (){
-        $id_usuario = $_SESSION['administrador'];
+        if (isset ($_SESSION['administrador'])){
+            $id_usuario = $_SESSION['administrador'];
+        }else{
+            $id_usuario = 0;
+        }
         return $id_usuario;
     }
     public function GetGenero($params = null){
@@ -36,8 +35,12 @@ class generoscontroller {
         $genero = $this->model->GetGenero($id_genero);
 
         $id = $this->checkUser();
-
-        $this->view->ShowGenero($genero,$id);
+        if (isset($_SESSION['usuario'])){
+            $usuario = $_SESSION['usuario'];
+        }else {
+            $usuario= null;
+        }
+        $this->view->ShowGenero($genero,$usuario,$id);
     }
     public function GetGeneros($params = null){
         $this->checkLogIn();
