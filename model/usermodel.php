@@ -17,6 +17,7 @@ class UserModel {
         return $password;
     }
 
+<<<<<<< HEAD
     public function GetUsuarios(){
         $sentencia = $this->db->prepare("SELECT * FROM usuarios");
         $sentencia->execute();
@@ -55,4 +56,6 @@ class UserModel {
         $sentencia = $this->db->prepare("UPDATE usuarios SET usuario=?,email=?,contrasena=? WHERE id_usuario=?");
         $sentencia->execute(array($usuario,$email,$hash,$id));
     }
+=======
+>>>>>>> 5f6b399657fb1a7742baa24971ebd525c170d4c1
 }

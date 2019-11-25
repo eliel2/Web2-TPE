@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2019 a las 22:36:51
+-- Tiempo de generación: 13-11-2019 a las 22:36:05
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.10
 
@@ -32,7 +32,8 @@ CREATE TABLE `peliculas` (
   `id_pelicula` int(11) NOT NULL,
   `titulo` text NOT NULL,
   `sinopsis` text NOT NULL,
-  `id_generoFK` int(11) NOT NULL
+  `id_generoFK` int(11) NOT NULL,
+  `id_imagenFK` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -44,7 +45,8 @@ CREATE TABLE `peliculas` (
 --
 ALTER TABLE `peliculas`
   ADD PRIMARY KEY (`id_pelicula`),
-  ADD KEY `id_generoFK` (`id_generoFK`);
+  ADD KEY `id_generoFK` (`id_generoFK`),
+  ADD KEY `imagen` (`id_imagenFK`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -54,7 +56,7 @@ ALTER TABLE `peliculas`
 -- AUTO_INCREMENT de la tabla `peliculas`
 --
 ALTER TABLE `peliculas`
-  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- Restricciones para tablas volcadas
@@ -64,6 +66,7 @@ ALTER TABLE `peliculas`
 -- Filtros para la tabla `peliculas`
 --
 ALTER TABLE `peliculas`
+  ADD CONSTRAINT `imagen` FOREIGN KEY (`id_imagenFK`) REFERENCES `imagenes` (`id_imagen`),
   ADD CONSTRAINT `peliculas_ibfk_1` FOREIGN KEY (`id_generoFK`) REFERENCES `generos` (`id_genero`);
 COMMIT;
 
