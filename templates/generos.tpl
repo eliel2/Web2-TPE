@@ -1,5 +1,9 @@
 {include file="header.tpl"}
-{include file="navlogout.tpl"}
+{if $admin eq 1 || $admin eq 0}
+  {include file="navlogout.tpl"}
+{else}
+  {include file="navlogin.tpl"}
+{/if}
 <div class="container">
   <div class="row">
     <div class="col-md-9">
@@ -34,7 +38,7 @@
   <div class="col-md-12">
     <div class="completar">
       <form action="insertarG" method="post">
-        <input type="text" name="genero" placeholder="genero">
+        <input type="text" name="genero" placeholder="Genero">
         <input type="submit" class="btn btn-success" value="Insertar">
       </form>  
     </div>

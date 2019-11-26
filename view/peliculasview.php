@@ -12,14 +12,11 @@ class peliculasview {
        
     }
 
-    public function DisplayPeliculas($peliculascongenero,$usuario,$id,$generos){
+    public function DisplayPeliculas($peliculascongenero,$id,$generos){
 
         $this->smarty->assign('titulo',"Peliculas");
         $this->smarty->assign('peliculascongenero',$peliculascongenero);
         $this->smarty->assign('admin',$id);
-        if ($usuario != null){
-            $this->smarty->assing('id_usuario',$usuario);
-        }
         $this->smarty->assign('generos',$generos);
         
         $this->smarty->display('templates/peliculas.tpl');

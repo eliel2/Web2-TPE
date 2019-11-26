@@ -73,11 +73,15 @@ class usercontroller {
 
     public function GetUsuarios(){
         $this->checkLogIn();
-        $users = $this->model->GetUsuarios();
-
         $id = $this->checkUser();
+        if ($id == 1){
+            $users = $this->model->GetUsuarios();
+            $this->view->AdminUser($id,$users);
 
-        $this->view->AdminUser($id,$users);
+        } else {
+            header("Location: " . BASE_URL);
+        }
+
     }
 
     public function MostrarRecuperacion (){

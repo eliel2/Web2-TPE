@@ -33,17 +33,9 @@ class peliculascontroller {
         if (isset ($_SESSION['administrador'])){
             $id_usuario = $_SESSION['administrador'];
         }else{
-            $id_usuario = 0;
+            $id_usuario = -1;
         }
         return $id_usuario;
-    }
-    public function retornarUser(){
-        if (isset($_SESSION['usuario'])){
-            $usuario = $_SESSION['usuario'];
-        }else {
-            $usuario= null;
-        }
-        return $usuario;
     }
 
     public function GetPeliculas(){
@@ -51,10 +43,9 @@ class peliculascontroller {
         $peliculascongenero = $this->getPeliculasConGenero();
         
         $id = $this->checkUser();
-        $usuario = $this->retornarUser();
         $generos = $this->generomodel->GetGeneros();
 
-        $this->view->DisplayPeliculas($peliculascongenero,$usuario,$id,$generos);
+        $this->view->DisplayPeliculas($peliculascongenero,$id,$generos);
     }
 
     public function GetPelicula($params = null){

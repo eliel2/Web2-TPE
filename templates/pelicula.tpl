@@ -1,5 +1,9 @@
 {include file="header.tpl"}
-{include file="navlogout.tpl"}
+{if $admin eq 1 || $admin eq 0}
+  {include file="navlogout.tpl"}
+{else}
+  {include file="navlogin.tpl"}
+{/if}
 
 <div class="container">
       <div class="row">

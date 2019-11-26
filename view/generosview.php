@@ -11,13 +11,11 @@ class generosview {
         $this->smarty->assign('BASE_URL',BASE_GENERO);
        
     }
-    public function ShowGenero($genero,$usuario,$id) {
+    public function ShowGenero($genero,$id) {
         $this->smarty->assign('genero', $genero);
         $this->smarty->assign('titulo',"genero");
         $this->smarty->assign('admin', $id);
-        if ($usuario != null){
-            $this->smarty->assing('id_usuario',$usuario);
-        }
+
         $this->smarty->display('templates/genero.tpl');
     }
     public function MostrarEditarG($id,$genero){

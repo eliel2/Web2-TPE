@@ -25,7 +25,7 @@ class generoscontroller {
         if (isset ($_SESSION['administrador'])){
             $id_usuario = $_SESSION['administrador'];
         }else{
-            $id_usuario = 0;
+            $id_usuario = -1;
         }
         return $id_usuario;
     }
@@ -33,14 +33,8 @@ class generoscontroller {
         $this->checkLogIn();
         $id_genero = $params[':ID'];
         $genero = $this->model->GetGenero($id_genero);
-
         $id = $this->checkUser();
-        if (isset($_SESSION['usuario'])){
-            $usuario = $_SESSION['usuario'];
-        }else {
-            $usuario= null;
-        }
-        $this->view->ShowGenero($genero,$usuario,$id);
+        $this->view->ShowGenero($genero,$id);
     }
     public function GetGeneros($params = null){
         $this->checkLogIn();
