@@ -1,6 +1,6 @@
 <?php
 require_once("./model/comentariosmodel.php");
-require_once("./api/JSONView.php");
+require_once("./api/api-view/JSONView.php");
 
 class comentariosapicontroller(){
     private $model;
@@ -42,6 +42,7 @@ class comentariosapicontroller(){
         
         if ($ComentarioNuevo)
             $this->view->response($ComentarioNueva, 200);
+            //header("Location: " . URL_COMENT);
         else
             $this->view->response("Error al insertar comentario", 500);
 

@@ -44,5 +44,14 @@
           </div>
         </div>
     </div>
+    {include file="vue/comentarios.tpl"}
+
+            <form id="FormComentarios" action="insertar" method="post">
+               <textarea class="form-control" name="comentario" id="Comentarios" rows="3"></textarea>
+                <input type="number" name="puntaje"  max="10">
+                <input type="submit" value="Insertar">
+            </form>
+
+<script src="js/peliculas.js"></script>
 </div>          
 {include file="footer.tpl"}
