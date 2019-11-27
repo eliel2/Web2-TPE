@@ -54,8 +54,20 @@ class generoscontroller {
 
     }
     public function InsertarGeneros(){
-        $this->model->InsertarGeneros($_POST['id:'],$_POST['genero']);
-        header("Location: " . BASE_GENERO);
+        $generos = $this->model->GetGeneros();
+        foreach($generos as $genero){
+            if(($_POST['genero'] != $genero->genero)){
+                $repetida = false;
+            }else{
+                $repetida = true;
+                $error = 'Genero repetido';
+                $this->view->showError($error);
+            }
+        }
+        if($repetida == false){
+            $this->model->InsertarGeneros($_POST['genero']);
+            header("Location: " . BASE_GENERO);
+        }
     }
     public function BorrarGenero($params = null) {
         $id = $params[':ID'];

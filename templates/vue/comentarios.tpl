@@ -7,13 +7,8 @@
                 <button id="btn-refresh" type="button" class="btn btn-primary btn-sm">Refresh</button>
             </div>
 
-            <ul v-if="!loading" class="list-group list-group-flush">
-                Cargando comentarios...
-            </ul>
-            <ul>
-                <a v-for="comentario in comentarios" v-bind:href="'comentarios/' + comentarios.id_comentarios" class="list-group-item list-group-item-action"> 
+            <ul v-for="comentario in comentarios">
                     {{ comentario.comentarios }} 
-                </a>
             </ul>
 
             <div class="card-footer text-muted">

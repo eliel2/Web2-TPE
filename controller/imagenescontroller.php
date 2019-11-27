@@ -41,7 +41,6 @@ class imagenescontroller {
                     $repetida = true;
                     $error = 'Ya existe imagen para esa pelicula';
                     $this->view->showError($error);
-                    header("Location: " . BASE_URL);
                 }
             }
             if ($repetida == false){

@@ -1,6 +1,6 @@
 <?php
 require_once("./model/comentariosmodel.php");
-require_once("./api-view/JSONView.php");
+require_once("./api/api-view/JSONView.php");
 
 class apicomentarios {
     private $view;
@@ -20,21 +20,8 @@ class apicomentarios {
     public function GetComentarios($params = null){
         $id = $params[':ID'];
         $comentarios = $this->model->GetComentarios($id);
+        
         $this->view->response($comentarios,200);
     }
-  
-   public function AddComentarios($params = []) {     
-        $comentarios = $this->getData(); 
-        $ComentariosId = $this->model->InsertarComentarios($comentarios->comentarios);
 
-       
-        $ComentarioNuevo = $this->model->GetComentario($ComentariosId);
-        
-        if ($ComentarioNuevo)
-            $this->view->response($ComentarioNueva, 200);
-            //header("Location: " . URL_COMENT);
-        else
-            $this->view->response("Error al insertar comentario", 500);
-
-    }
 }

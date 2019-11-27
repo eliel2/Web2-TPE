@@ -22,10 +22,10 @@ class generosmodel {
 
         return $generos;
     }
-    public function InsertarGeneros($id,$generos){
+    public function InsertarGeneros($generos){
 
-        $sentencia = $this->db->prepare("INSERT INTO generos(id_genero,genero) VALUES(?,?)");
-        $sentencia->execute(array($id,$generos));
+        $sentencia = $this->db->prepare("INSERT INTO generos(genero) VALUES(?)");
+        $sentencia->execute(array($generos));
     }
     public function BorrarGenero($id){
         $sentencia = $this->db->prepare("DELETE FROM generos WHERE id_genero=?");

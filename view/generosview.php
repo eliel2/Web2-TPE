@@ -24,7 +24,13 @@ class generosview {
         $this->smarty->assign('admin', $id);
         
         $this->smarty->display('templates/editargenero.tpl');
-    }  
+    } 
+    
+    public function showError($msgError) {
+        echo "<h1>ERROR!</h1>";
+        echo "<h2>{$msgError}</h2>";
+    }
+    
     public function ShowGeneros($generos,$id) {
         $this->smarty->assign('titulo',"generos");
         $this->smarty->assign('generos', $generos);

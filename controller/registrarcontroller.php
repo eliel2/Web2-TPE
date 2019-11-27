@@ -24,7 +24,6 @@ class registrarcontroller {
                     $repetida = true;
                     $error = 'Usuario o email ya existen';
                     $this->view->showError($error);
-                    die();
                 }
             }
             if($repetida == false){

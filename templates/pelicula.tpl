@@ -28,6 +28,7 @@
               <td>{$peli["titulo"]}</td>
               <td>{$peli["sinopsis"]}</td>
               <td>{$peli["genero"]}</td>
+              <input type="hidden" id='pelid' value="{$peli["id_pelicula"]}" readonly="readonly">
               {if isset($peli["id_imagen"]) && $peli["id_imagen"] eq $peli["id_pelicula"]}
                 <td><img src="{$peli["imagen"]}"width="100" height="100"/></td>
               {else}
@@ -50,18 +51,6 @@
           </div>
         </div>
     </div>
-<<<<<<< HEAD
-    <script src="./js/peliculas.js"></script>
-=======
-    {include file="vue/comentarios.tpl"}
-
-            <form id="FormComentarios" action="insertar" method="post">
-               <textarea class="form-control" name="comentario" id="Comentarios" rows="3"></textarea>
-                <input type="number" name="puntaje"  max="10">
-                <input type="submit" value="Insertar">
-            </form>
-
 <script src="js/peliculas.js"></script>
->>>>>>> 8a1f0530bb055b8d2b1c6caeb4d9a469cec34dee
 </div>          
 {include file="footer.tpl"}

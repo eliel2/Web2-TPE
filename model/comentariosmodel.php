@@ -12,8 +12,8 @@ class comentariosmodel{
     public function GetComentarios($id){
         $sentencia = $this->db->prepare("SELECT * FROM comentarios WHERE id_peliculafk = ?");
         $sentencia->execute(array($id));
-        $comentarios = $sentencia->fetch(PDO::FETCH_OBJ);
+        $comentario = $sentencia->fetchAll(PDO::FETCH_ASSOC);
         
-        return $comentarios;
+        return $comentario;
     }
 }
