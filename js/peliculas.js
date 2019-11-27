@@ -1,27 +1,27 @@
-//document.addEventListener("DOMContentLoaded", function(){
-    "use strict";
+"use strict";
+
 
     let app = new Vue({
         el: "#template-vue-comentarios",
         data: {
             subtitle: "Comentando",
-            comentarios: [], 
+            loading: false,
+            comentarios: [],
             auth: true
         }
     });
     
-    function GetComentarios() {
-        fetch("api/comentarios/" + id)
+    function GetComentario() {
+        app.loading = true;
+        fetch("api/comentarios")
         .then(response => response.json())
         .then(comentarios => {
-            app.comentarios = comentarios; 
+            app.loading = false,
+            app.comentarios = comentarios;
         })
         .catch(error => console.log(error));
     }
     
-    function AddComentarios(e) {
-        e.preventDefault();
-        
         let data = {
             comentario: document.querySelector("textarea[name=comentario]").value,
             puntaje: document.querySelector("input[name=puntaje]").value,

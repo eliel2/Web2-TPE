@@ -30,6 +30,11 @@ class peliculasview {
         $this->smarty->display('templates/pelicula.tpl');
     }
 
+    public function showError($msgError) {
+        echo "<h1>ERROR!</h1>";
+        echo "<h2>{$msgError}</h2>";
+    }
+
     public function MostrarEditar($pelicula,$id,$generos){
         $this->smarty->assign('titulo',"Peliculas");
         $this->smarty->assign('pelicula',$pelicula);

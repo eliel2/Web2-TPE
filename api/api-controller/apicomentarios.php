@@ -1,37 +1,27 @@
 <?php
 require_once("./model/comentariosmodel.php");
-require_once("./api/api-view/JSONView.php");
+require_once("./api-view/JSONView.php");
 
-class comentariosapicontroller(){
-    private $model;
+class apicomentarios {
     private $view;
     private $data;
-    
+    private $model;
+
     public function __construct() {
         $this->view = new JSONView();
         $this->data = file_get_contents("php://input"); 
-        $this->model = new ComentariosModel();
+        $this->model = new comentariosmodel();
     }
 
-    function getData(){ 
-        return json_decode($this->data); 
-    }  
-    public function GetComentarios($params = null) {
-        $comentarios = $this->model->GetComentarios();
-        $this->view->response($comentarios, 200);
-    }
-    public function deletecomentario($params = []) {
-        $comentario_id = $params[':ID'];
-        $comentario = $this->model->GetComentario($comentario_id);
-
-        if ($comentario) {
-            $this->model->BorrarComentario($task_id);
-            $this->view->response("comentario id=$comentario_id eliminado con éxito", 200);
-        }
-        else 
-            $this->view->response("comentario id=$comentario_id not found", 404);
+    private function getData() {
+        return json_decode($this->data);
     }
 
+    public function GetComentarios($params = null){
+        $id = $params[':ID'];
+        $comentarios = $this->model->GetComentarios($id);
+        $this->view->response($comentarios,200);
+    }
   
    public function AddComentarios($params = []) {     
         $comentarios = $this->getData(); 

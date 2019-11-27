@@ -41,9 +41,18 @@
             {/foreach}
           </tbody>
         </table>
+        {include file="vue/comentarios.tpl"}
+         <form id="FormComentarios" action="insertar" method="post">
+               <textarea class="form-control" name="comentario" id="Comentarios" rows="3"></textarea>
+                <input type="number" name="puntaje"  max="10">
+                <input type="submit" value="Insertar">
+            </form>
           </div>
         </div>
     </div>
+<<<<<<< HEAD
+    <script src="./js/peliculas.js"></script>
+=======
     {include file="vue/comentarios.tpl"}
 
             <form id="FormComentarios" action="insertar" method="post">
@@ -53,5 +62,6 @@
             </form>
 
 <script src="js/peliculas.js"></script>
+>>>>>>> 8a1f0530bb055b8d2b1c6caeb4d9a469cec34dee
 </div>          
 {include file="footer.tpl"}

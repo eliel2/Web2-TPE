@@ -33,13 +33,25 @@ class imagenescontroller {
    
     public function InsertarImagenes(){
         if($_FILES['input_name']['type'] == "image/jpg" || $_FILES['input_name']['type'] == "image/jpeg" || $_FILES['input_name']['type'] == "image/png" ) {
+            $imagenes = $this->model->GetImagenes();
+            foreach ($imagenes as $imagen){
+                if($_POST['id_peliculasfk'] != $imagen->id_peliculasfk){
+                    $repetida = false;
+                }else {
+                    $repetida = true;
+                    $error = 'Ya existe imagen para esa pelicula';
+                    $this->view->showError($error);
+                    header("Location: " . BASE_URL);
+                }
+            }
+            if ($repetida == false){
             $this->model->InsertarImagenes($_FILES['input_name'], $_POST['id_peliculasfk']);
             header("Location: " . BASE_URL);
+            }
         }
         else {
             $error = 'El tipo de archivo no esta permitido';
             $this->view->showError($error);
-            die();
         }
     }
 }
