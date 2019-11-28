@@ -3,6 +3,7 @@ require_once("./model/peliculasmodel.php");
 require_once("./view/peliculasview.php");
 require_once("./model/generosmodel.php");
 require_once("./model/imagenesmodel.php");
+require_once("./model/comentariosmodel.php");
 
 class peliculascontroller {
 
@@ -120,6 +121,7 @@ class peliculascontroller {
     public function BorrarPelicula($params = null) {
         $id = $params[':ID'];
         $this->imagenesmodel->BorrarImagen($id);
+        $this->comentariosmodel->BorrarComentario($id);
         $this->model->BorrarPelicula($id);
         header("Location: " . BASE_URL);
     }

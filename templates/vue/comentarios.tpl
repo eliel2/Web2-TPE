@@ -8,7 +8,10 @@
             </div>
 
             <ul v-for="comentario in comentarios">
-                    {{ comentario.comentarios }} 
+                <span> {{ comentario.comentarios }}</span>
+                <span>
+                    <button v-on:click="DeleteComentarios(comentario.id_comentarios)" class="btn">borrar</button>
+                </span>
             </ul>
 
             <div class="card-footer text-muted">

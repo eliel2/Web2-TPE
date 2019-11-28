@@ -24,4 +24,30 @@ class apicomentarios {
         $this->view->response($comentarios,200);
     }
 
+    public function deletecomentario($params = []) {
+        $comentario_id = $params[':ID'];
+
+        if ($comentario_id) {
+            $this->model->BorrarComentario($comentario_id);
+            $this->view->response("comentario id=$comentario_id eliminado con éxito", 200);
+        }
+        else 
+            $this->view->response("comentario id=$comentario_id not found", 404);
+    }
+
+  
+   public function AddComentarios($params = []) {     
+        $comentarios = $this->getData();
+
+        $ComentariosId = $this->model->InsertarComentarios($comentarios->comentario,$comentarios->puntaje,$comentarios->id_peliculafk);
+
+        $nuevoComentario = $this->model->GetComentario($ComentariosId);
+
+        if ($nuevoComentario)
+            $this->view->response($nuevoComentario, 200);
+        else
+            $this->view->response("Error al insertar comentario", 500);
+
+    }
+
 }

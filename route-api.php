@@ -9,6 +9,8 @@
 
     // rutas
     $router->addRoute("comentarios/:ID", "GET", "apicomentarios", "GetComentarios");
+    $router->addRoute("comentarios/:ID", "DELETE", "apicomentarios", "DeleteComentario");
+    $router->addRoute("comentarios/:ID", "POST", "apicomentarios", "AddComentarios");
 
     //run
     $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']); 
