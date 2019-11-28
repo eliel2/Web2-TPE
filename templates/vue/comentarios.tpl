@@ -4,12 +4,12 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="mb-0">Comentarios</h4>
-                <button id="btn-refresh" type="button" class="btn btn-primary btn-sm">Refresh</button>
+                
             </div>
 
             <ul v-for="comentario in comentarios">
-                <span> {{ comentario.comentarios }}</span>
-                <span>
+                <span> {{ comentario.comentarios }}</span> ....puntaje: <span> {{ comentario.puntaje }}</span>
+                <span >
                     <button v-on:click="DeleteComentarios(comentario.id_comentarios)" class="btn">borrar</button>
                 </span>
             </ul>

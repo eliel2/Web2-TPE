@@ -39,7 +39,7 @@ class apicomentarios {
    public function AddComentarios($params = []) {     
         $comentarios = $this->getData();
 
-        $ComentariosId = $this->model->InsertarComentarios($comentarios->comentario,$comentarios->puntaje,$comentarios->id_peliculafk);
+        $ComentariosId = $this->model->InsertarComentarios($comentarios->comentarios,$comentarios->puntaje,$comentarios->id_peliculafk);
 
         $nuevoComentario = $this->model->GetComentario($ComentariosId);
 

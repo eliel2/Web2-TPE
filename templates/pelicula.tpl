@@ -43,11 +43,13 @@
           </tbody>
         </table>
         {include file="vue/comentarios.tpl"}
+        {if $admin eq "0" || $admin eq "1"}
          <form id="FormComentarios" action="nuevo" method="post">
                <textarea class="form-control" name="comentario" id="Comentarios" rows="3"></textarea>
                 <input type="number" name="puntaje"  max="10">
                 <input type="submit" value="Insertar">
             </form>
+             {/if}
           </div>
         </div>
     </div>

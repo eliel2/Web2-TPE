@@ -3,9 +3,14 @@
     let app = new Vue({
         el: "#template-vue-comentarios",
         data: {
-            subtitle: "Comentando",
+            subtitle: "Comenta sobre tu pelicula favorita",
             comentarios: [],
             auth: true
+        },
+        methods: {
+            DeleteComentarios: function (id) {
+                DeleteComentarios(id);
+            }
         }
     });
     
@@ -20,10 +25,12 @@
         })
         .catch(error => console.log(error));
     }
+
     async function AddComentarios(e) {
         e.preventDefault();
         let data = {
             comentario: document.querySelector("textarea[name=comentario]").value,
+            comentarios: document.querySelector("textarea[name=comentario]").value,
             puntaje: document.querySelector("input[name=puntaje]").value,
             id_peliculafk: document.getElementById("pelid").value
             
@@ -41,15 +48,15 @@
         if (!response.ok)
             console.log("Error de conexion");
 
-        }
+        
         GetComentarios();
-
-        function DeleteComentarios(id){ 
-            fetch("api/comentarios"+ id, {
-                method: 'DELETE',
-            })
-            .then(response => response.GetComentarios())
-            .catch(error => console.log(error));
+    }
+    function DeleteComentarios(id){
+        fetch("api/comentarios/"+ id, {
+            method: 'DELETE',
+        })
+        .then(r => GetComentarios())
+        .catch(error => console.log(error));
     }
 GetComentarios();
 document.querySelector("#FormComentarios").addEventListener('submit', AddComentarios);

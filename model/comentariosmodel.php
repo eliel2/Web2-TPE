@@ -12,13 +12,13 @@ class comentariosmodel{
     public function GetComentarios($id){
         $sentencia = $this->db->prepare("SELECT * FROM comentarios WHERE id_peliculafk = ?");
         $sentencia->execute(array($id));
-        $comentario = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $comentarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
         
-        return $comentario;
+        return $comentarios;
     }
 
     public function GetComentario($id){
-        $sentencia = $this->db->prepare("SELECT * FROM comentarios WHERE id_comentario = ?");
+        $sentencia = $this->db->prepare("SELECT * FROM comentarios WHERE id_comentarios = ?");
         $sentencia->execute(array($id));
         $comentario = $sentencia->fetch(PDO::FETCH_ASSOC);
         
@@ -26,7 +26,7 @@ class comentariosmodel{
     }
 
     public function BorrarComentario($id){
-        $sentencia = $this->db->prepare("DELETE FROM comentarios WHERE id_peliculafk=?");
+        $sentencia = $this->db->prepare("DELETE FROM comentarios WHERE id_comentarios=?");
         $sentencia->execute(array($id));
     }
     public function InsertarComentarios($comentarios,$puntaje,$id_peliculafk){
