@@ -42,14 +42,16 @@
             {/foreach}
           </tbody>
         </table>
-        {include file="vue/comentarios.tpl"}
         {if $admin eq "0" || $admin eq "1"}
+        {include file="vue/comentarios.tpl"}
          <form id="FormComentarios" action="nuevo" method="post">
                <textarea class="form-control" name="comentario" id="Comentarios" rows="3"></textarea>
                 <input type="number" name="puntaje"  max="10">
                 <input type="submit" value="Insertar">
             </form>
-             {/if}
+        {else}
+            <span> Necesita estar loggeado para ver los comentarios</span>
+        {/if}
           </div>
         </div>
     </div>

@@ -11,12 +11,14 @@ class peliculascontroller {
     private $view;
     private $generomodel;
     private $imagenesmodel;
+    private $comentmodel;
 
 	function __construct(){
         $this->model = new peliculamodel();
         $this->view = new peliculasview();
         $this->generomodel = new generosmodel();
         $this->imagenesmodel = new imagenesmodel();
+        $this->comentmodel = new comentariosmodel();
     }
     
     public function checkLogIn(){
@@ -121,7 +123,7 @@ class peliculascontroller {
     public function BorrarPelicula($params = null) {
         $id = $params[':ID'];
         $this->imagenesmodel->BorrarImagen($id);
-        $this->comentariosmodel->BorrarComentario($id);
+        $this->comentmodel->BorrarTodosComentarios($id);
         $this->model->BorrarPelicula($id);
         header("Location: " . BASE_URL);
     }

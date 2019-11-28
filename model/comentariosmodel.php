@@ -29,6 +29,10 @@ class comentariosmodel{
         $sentencia = $this->db->prepare("DELETE FROM comentarios WHERE id_comentarios=?");
         $sentencia->execute(array($id));
     }
+    public function BorrarTodosComentarios($id){
+        $sentencia = $this->db->prepare("DELETE FROM comentarios WHERE id_peliculafk=?");
+        $sentencia->execute(array($id));
+    }
     public function InsertarComentarios($comentarios,$puntaje,$id_peliculafk){
 
         $sentencia = $this->db->prepare("INSERT INTO comentarios(comentarios,puntaje,id_peliculafk) VALUES(?,?,?)");

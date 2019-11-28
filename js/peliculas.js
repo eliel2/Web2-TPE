@@ -5,6 +5,7 @@
         data: {
             subtitle: "Comenta sobre tu pelicula favorita",
             comentarios: [],
+            usuarios: [],
             auth: true
         },
         methods: {
